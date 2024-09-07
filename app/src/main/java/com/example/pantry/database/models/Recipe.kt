@@ -9,6 +9,5 @@ data class Recipe(
     @PrimaryKey(autoGenerate = true) val id: Long,
     @ColumnInfo(name = "name") val name:String,
     @ColumnInfo(name = "instructions") val instructions:String,
-    @ColumnInfo(name = "ingredients") val ingredients: Map<String, Int>,
     @ColumnInfo(name = "pictures") val pictures : String
 )

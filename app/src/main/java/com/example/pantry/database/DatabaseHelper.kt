@@ -2,7 +2,10 @@ package com.example.pantry.database
 
 import android.content.Context
 import com.example.pantry.database.models.Food
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -12,10 +15,12 @@ class DatabaseHelper(context: Context) {
     private val sharedPreferences = context.getSharedPreferences(DATABASE_NAME, Context.MODE_PRIVATE)
     private val db = PantryDB.get(context.applicationContext)
     private val foodDao = db!!.foodDao()
-    private val accessRecordDao = db!!.recipeDao()
+    private val recipeDao = db!!.recipeDao()
 
-    fun getAllFoods(): Flow<List<Food>> {
-        return foodDao.getAllFoods()
+    fun getAllFoods(): Job {
+        return CoroutineScope(Dispatchers.IO).launch {
+            foodDao.getAllFoods()
+        }
     }
 
     fun insertFood(food : Food): Long {

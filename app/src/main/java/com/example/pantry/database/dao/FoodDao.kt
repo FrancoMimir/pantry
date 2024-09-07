@@ -14,19 +14,19 @@ import kotlinx.coroutines.flow.Flow
 interface FoodDao {
     // Insert a new Food item or replace it if there is a conflict
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-     fun insert(food: Food): Long
+    fun insert(food: Food): Long
 
     // Update an existing Food item
     @Update
-     fun update(food: Food)
+    fun update(food: Food)
 
     // Delete a Food item
     @Delete
-     fun delete(food: Food)
+    fun delete(food: Food)
 
     // Get a Food item by its ID
     @Query("SELECT * FROM Food WHERE id = :id")
-     fun getFoodById(id: Int): Food?
+    fun getFoodById(id: Int): Food?
 
     // Get all Food items
     @Query("SELECT * FROM Food")
